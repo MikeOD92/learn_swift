@@ -45,7 +45,6 @@ struct URLImage: View {
 struct Course:  Hashable, Codable {
     let name: String
     let image: String
-    
 }
 
 struct ContentView: View {
