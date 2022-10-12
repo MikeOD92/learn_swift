@@ -27,7 +27,7 @@ struct WeatherDayView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
-                    case "Cloudy":
+                    case "Clouds":
                         Image(systemName: "cloud")
                             .renderingMode(.original)
                             .resizable()
@@ -48,7 +48,7 @@ struct WeatherDayView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
-                    case "Cloudy":
+                    case "Clouds":
                         Image(systemName: "cloud.sun.fill")
                             .renderingMode(.original)
                             .resizable()

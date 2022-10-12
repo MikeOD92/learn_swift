@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
                                                 )
     
     func fetch(){
-        let baseurl : String = "https://api.openweathermap.org/data/2.5/forecast?q=Los%20Angeles&cnt=5&units=imperial&appid="
+        let baseurl : String = "https://api.openweathermap.org/data/2.5/forecast?q=Los%20Angeles&cnt=10&units=imperial&appid="
         let apiToken : String = "\(ProcessInfo.processInfo.environment["API_KEY"] ?? "" )"
             guard let url = URL(string: baseurl + apiToken)
             else {

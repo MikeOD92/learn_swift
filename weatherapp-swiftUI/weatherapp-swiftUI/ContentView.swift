@@ -22,41 +22,65 @@ struct ContentView: View {
             BackgroundView(isNight: $isNight)
             VStack{
                 CityTextView(cityName: "Los Angeles, CA")
-                MainWeatherStatusView(tempData: viewModel.data, weatherImg: isNight ? "cloud.moon.fill" :  "sun.haze.fill")
-                HStack(spacing: 30){
+                    .padding(.top)
+                MainWeatherStatusView(tempData: viewModel.data)
+                
+                ZStack{
+                    VStack{
+                        Text("Hourly Forcast: ")
+                            .font(.system(size: 16, weight: .medium, design: .default))
+                            .foregroundColor(.white)
+                            .frame(width: 300, height: 20, alignment: .leading)
+                            .padding(.top)
+                        ScrollView(.horizontal){
+                            HStack(spacing: 30){
+                                ForEach(viewModel.data.list, id: \.self){
+                                    datapoint in
+                                    WeatherDayView(dayOfWeek: datapoint.dt_txt, temp: datapoint)
+                                }
+                            }.padding()
+                        }
+                    }
+                        .frame(width:300, height:150)
+                        .padding()
+                }
+                .background(isNight ? Color(UIColor.systemIndigo).opacity(0.35) : Color(UIColor.white).opacity(0.2))
+                ScrollView(.vertical){
+                    // vertical stack for daily forcast need to make seprate view
+                    VStack{
+                        Text("10 Day forcast")
+                        HStack{
+                            Text("TUE")
+                            Text("Low: 50°")
+                            Text("High: 70°")
+                        }
+                        Spacer()
                     
-                    ForEach(viewModel.data.list, id: \.self){
-                        datapoint in
-                        WeatherDayView(dayOfWeek: datapoint.dt_txt, temp: datapoint)
+                        Button{
+                            isNight.toggle()
+                            Task{
+                                viewModel.fetch()
+                            }
+                        }label: {
+                            WeatherButtonView( textColor: .blue, backgroundColor: .white, title: "Change Daytime")
+                        }
                     }
-                }
-                Spacer()
-                Button{
-                    isNight.toggle()
-                    Task{
-                        viewModel.fetch()
                     }
-                }label: {
-                    WeatherButtonView( textColor: .blue, backgroundColor: .white, title: "Change Daytime")
-                }
-             
-                Spacer()
+                    
           
             }
-            
-            
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear{
             viewModel.fetch()
         }
     }}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
 
 
 struct BackgroundView: View {
@@ -80,28 +104,31 @@ struct CityTextView: View{
         Text(cityName)
             .font(.system(size: 32, weight: .medium, design: .default))
             .foregroundColor(.white)
-            .frame(width: 200, height: 200)
+            .frame(width: 300, height: 100)
             .padding(.top)
     }
 }
 
 struct MainWeatherStatusView: View{
-//    @Binding var tempData: String
     var tempData: Response
-    var weatherImg: String
-    
+   
     var body: some View{
-        VStack(spacing: 10){
-            Image(systemName: weatherImg)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio( contentMode: .fit)
-                .frame(width: 170, height: 170)
+        VStack{
             if 0 < tempData.list.count {
                 Text("\(String(format: "%.1f", tempData.list[0].main.temp))º")
                     .font(.system(size: 70, weight: .light, design: .default))
                     .foregroundColor(.white)
-
+                Text(tempData.list[0].weather[0].description)
+                    .font(.system(size: 20, weight: .medium, design: .default))
+                    .foregroundColor(.white)
+                HStack{
+                    Text("H: \(String(format: "%.0f", tempData.list[0].main.temp_max))°")
+                        .font(.system(size: 20, weight: .light, design: .default))
+                        .foregroundColor(.white)
+                    Text("L: \(String(format: "%.0f", tempData.list[0].main.temp_min))°")
+                        .font(.system(size: 20, weight: .light, design: .default))
+                        .foregroundColor(.white)
+                }
             }
         }.padding(.bottom, 40)
     }
