@@ -24,12 +24,11 @@ struct ContentView: View {
                 CityTextView(cityName: "Los Angeles, CA")
                 MainWeatherStatusView(tempData: viewModel.data, weatherImg: isNight ? "cloud.moon.fill" :  "sun.haze.fill")
                 HStack(spacing: 30){
-
-                    WeatherDayView(dayOfWeek: "TUE", imageName: "sun.haze.fill", temp: 76)
-                    WeatherDayView(dayOfWeek: "WED", imageName: "wind", temp: 80)
-                    WeatherDayView(dayOfWeek: "THU", imageName: "sun.max.fill", temp: 85)
-                    WeatherDayView(dayOfWeek: "FRI", imageName: "thermometer.sun.fill", temp: 94)
-                    WeatherDayView(dayOfWeek: "SAT", imageName: "sun.max.fill", temp: 76)
+                    
+                    ForEach(viewModel.data.list, id: \.self){
+                        datapoint in
+                        WeatherDayView(dayOfWeek: datapoint.dt_txt, temp: datapoint)
+                    }
                 }
                 Spacer()
                 Button{
@@ -58,27 +57,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct WeatherDayView: View {
-    var dayOfWeek: String
-    var imageName: String
-    var temp: Int
-    
-    var body: some View {
-        VStack{
-            Text(dayOfWeek)
-                .font(.system(size: 16, weight: .medium, design: .default))
-                .foregroundColor(.white)
-            Image(systemName:imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-            Text("\(temp)°")
-                .font(.system(size: 26, weight: .light, design: .default))
-                .foregroundColor(.white)
-        }
-    }
-}
+
 
 struct BackgroundView: View {
     
@@ -118,9 +97,12 @@ struct MainWeatherStatusView: View{
                 .resizable()
                 .aspectRatio( contentMode: .fit)
                 .frame(width: 170, height: 170)
-            Text("\(String(format: "%.1f", tempData.main.temp))º")
-                .font(.system(size: 70, weight: .light, design: .default))
-                .foregroundColor(.white)
+            if 0 < tempData.list.count {
+                Text("\(String(format: "%.1f", tempData.list[0].main.temp))º")
+                    .font(.system(size: 70, weight: .light, design: .default))
+                    .foregroundColor(.white)
+
+            }
         }.padding(.bottom, 40)
     }
 }

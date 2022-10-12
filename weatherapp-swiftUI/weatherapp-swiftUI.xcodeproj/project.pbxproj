@@ -14,6 +14,7 @@
 		1677CA7C28F492EC00AF85B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1677CA7B28F492EC00AF85B9 /* Assets.xcassets */; };
 		1677CA7F28F492EC00AF85B9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1677CA7E28F492EC00AF85B9 /* Preview Assets.xcassets */; };
 		1677CA8628F4B99500AF85B9 /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1677CA8528F4B99500AF85B9 /* WeatherButton.swift */; };
+		1678CAFD28F75E8500C28E48 /* WeatherDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1678CAFC28F75E8500C28E48 /* WeatherDayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1677CA7B28F492EC00AF85B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1677CA7E28F492EC00AF85B9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1677CA8528F4B99500AF85B9 /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
+		1678CAFC28F75E8500C28E48 /* WeatherDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				1677CA7728F492EA00AF85B9 /* weatherapp_swiftUIApp.swift */,
 				1677CA7928F492EA00AF85B9 /* ContentView.swift */,
+				1678CAFC28F75E8500C28E48 /* WeatherDayView.swift */,
 				16549E5F28F5F89200E0678A /* ResponseModel.swift */,
 				16549E6128F5FB1500E0678A /* ViewModel.swift */,
 				1677CA8528F4B99500AF85B9 /* WeatherButton.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				16549E6228F5FB1500E0678A /* ViewModel.swift in Sources */,
 				1677CA7A28F492EA00AF85B9 /* ContentView.swift in Sources */,
+				1678CAFD28F75E8500C28E48 /* WeatherDayView.swift in Sources */,
 				1677CA7828F492EA00AF85B9 /* weatherapp_swiftUIApp.swift in Sources */,
 				16549E6028F5F89200E0678A /* ResponseModel.swift in Sources */,
 				1677CA8628F4B99500AF85B9 /* WeatherButton.swift in Sources */,
